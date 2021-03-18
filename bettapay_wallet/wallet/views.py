@@ -117,6 +117,8 @@ def register(request):
 
     else:
         return render(request, 'register.htm', {'detail': detail})
+
+        
 def logout(request):
     auth.logout(request)
     return redirect('/')
