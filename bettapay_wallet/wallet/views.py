@@ -59,6 +59,8 @@ def index(request):
 
     return render(request, 'index.htm', {'detail' : detail})
 
+#sending money through the bitcoin process to another bitcoin account
+
 def login(request):
 
     if request.method == 'POST':
