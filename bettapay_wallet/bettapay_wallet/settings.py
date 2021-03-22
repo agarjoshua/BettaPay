@@ -13,6 +13,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+#deployment configurations
+from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ََAPPNAME.settings')
+application = Cling(get_wsgi_application())
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,9 +32,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'w^5pg1!quw&o#s9-x9z70e^+fhx63)a_%vk7spryur@l%*&4&('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','https://www.mettapay.net/']
 
 
 # Application definition
@@ -76,12 +84,12 @@ WSGI_APPLICATION = 'bettapay_wallet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -92,6 +100,19 @@ DATABASES = {
 #         'HOST': 'localhost'
 #     }
 # }
+
+#the deployment database
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mettapay_bettapay_wallet',
+        'USER': 'mettapay_root',
+        'PASSWORD': '$Outh2020',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -137,3 +158,11 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# Static asset configuration on deployment
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = (
+os.path.join(BASE_DIR, 'static'),
+)

@@ -124,3 +124,5 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+#websrapping the web for transaction I.D
